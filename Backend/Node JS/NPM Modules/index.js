@@ -1,9 +1,30 @@
-const dayjs = require("dayjs");
+const logEvents = require('./logEvents');
 
-const date = dayjs()
+const eventEmitter = require('events');
 
-const {v4: uuid} = require('uuid')
+class MyEmitter extends eventEmitter {
 
-console.log(date.format('MMM, DD'))
+};
 
-console.log(uuid())
+const myEmitter = new MyEmitter;
+
+myEmitter.on('log', (message) => {
+    logEvents(message);
+})
+
+//Timer
+setTimeout(() => {
+    myEmitter.emit('log', 'Log event emitted!')
+}, 2000)
+
+
+
+// const dayjs = require("dayjs");
+
+// const date = dayjs()
+
+// const {v4: uuid} = require('uuid')
+
+// console.log(date.format('MMM, DD'))
+
+// console.log(uuid())
