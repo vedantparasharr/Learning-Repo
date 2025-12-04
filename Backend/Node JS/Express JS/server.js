@@ -1,8 +1,10 @@
 const path = require("path");
 const express = require("express");
+const { logger } = require("./logEvents");
 const app = express();
-const PORT = process.env.PORT || 3000;
 
+const PORT = process.env.PORT || 3000;
+app.use(logger);
 //MIDDLEWARES
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
