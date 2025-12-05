@@ -2,3 +2,6 @@
 20251204	23:41:36	26d4f72f-541d-4c19-8f60-d91582dbc162	GET	undefined	/css/style.css
 20251204	23:47:32	7a146846-3b0e-40e3-9e20-c8278474edbb	GET	undefined	/
 20251204	23:47:32	3ff9dcc8-00db-4ab9-8e22-46a6bd9a347e	GET	undefined	/css/style.css
+20251205	18:56:00	19e3dbe8-f8d6-4afc-839e-bcdb00129daa	GET	https://www.google.com	/
+20251205	18:57:05	3cff1deb-1acb-4148-a82e-36b393dce129	GET	https://www.google.com	/
+20251205	18:58:18	ff74ee2d-9a93-414d-a03b-067b456b7ab1	GET	https://www.google.com	/

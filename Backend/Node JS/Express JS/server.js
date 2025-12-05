@@ -1,10 +1,24 @@
 const path = require("path");
 const express = require("express");
 const { logger } = require("./logEvents");
+const cors = require("cors");
 const app = express();
 
 const PORT = process.env.PORT || 3000;
 app.use(logger);
+const whitelist = ["https://www.google.com", "https://www.youtube.com"];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
+
 //MIDDLEWARES
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
