@@ -1,5 +1,47 @@
 const fs = require("fs");
 const http = require("http");
+const path = require("path");
+const { send } = require("process");
+
+const server = http.createServer((req, res) => {
+  let sendData;
+  if (req.url === "/about.html") {
+    fs.readFile(
+      path.join(__dirname, "files", "about.html"),
+      "utf-8",
+      (error, data) => {
+        if (error) {
+          console.log("READ ERROR:", error);
+          res.writeHead(500);
+          return res.end("File error");
+        }
+        res.writeHead(200, { "content-type": "text/html" });
+        res.end(data);
+      }
+    );
+  } else if (req.url === "/projects.html") {
+    fs.readFile(
+      path.join(__dirname, "files", "projects.html"),
+      "utf-8",
+      (error, data) => {
+        res.writeHead(200, { "content-type": "text/html" });
+        res.end(data);
+      }
+    );
+  } else if (req.url === "/") {
+    fs.readFile(
+      path.join(__dirname, "files", "index.html"),
+      "utf-8",
+      (error, data) => {
+        res.writeHead(200, { "content-type": "text/html" });
+        res.end(data);
+      }
+    );
+  }
+});
+
+server.listen(3000);
+
 
 // fs.writeFile("message.txt", "I am Vedant", (error) => {
 //   if (error) {
@@ -40,8 +82,10 @@ const http = require("http");
 //   else console.log(data);
 // });
 
-const server = http.createServer((req, res) => {
-  res.end("Hello");
-});
+// const server = http.createServer((req, res) => {
+//   if (req.url === "/about") {
+//     res.end("Hello");
+//   }
+// });
 
-server.listen(3000);
+// server.listen(3000);
