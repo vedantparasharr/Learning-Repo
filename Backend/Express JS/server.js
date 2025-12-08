@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 
+app.use(express.json);
+app.use(express.urlencoded({extended:true}));
+
 const m1 = (req, res, next) => {
   console.log("1");
   next();
