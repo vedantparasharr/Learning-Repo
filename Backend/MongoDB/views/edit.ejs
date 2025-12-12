@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <div class="w-full h-full bg-zinc-900 p-10 text-white">
+      <div class="nav mb-8">
+        <a href="/read" class="text-blue-500">Read Users </a>
+      </div>
+      <h1 class="text-3xl tracking-tighter mb-3 font-medium">Edit User</h1>
+      <div class="users flex gap-5 flex-wrap mb-3">
+        <% const { name, username, email, image, _id } = user %>
+        <div class="w-72 p-5 bg-zinc-800 rounded-lg">
+          <div class="w-full h-72 rounded-lg bg-zinc-700 overflow-hidden">
+            <img
+              src="<%= image %>"
+              class="h-full w-full object-cover overflow-hidden"
+            />
+          </div>
+          <h2 class="text-xl font-medium mt-3 tracking-tighter"><%= name %></h2>
+          <h3 class="text-zinc-500 font-medium tracking-tighter">
+            <%= email %>
+          </h3>
+          <div class="flex w-36 mt-4 justify-between">
+            <a href="/delete/<%= _id %>" class="text-red-400 tracking-tighter"
+              >Delete User</a
+            >
+          </div>
+        </div>
+      </div>
+      <form action="/update/<%= _id %>" method="post" class="flex flex-col gap-3">
+        <input
+          type="text"
+          class="px-3 py-2 bg-transparent border-2 border-zinc-800 rounded-lg outline-none focus:border-blue-400"
+          placeholder="Name"
+          name="name"
+          value="<%= name %>"
+        />
+        <input
+          type="text"
+          class="px-3 py-2 bg-transparent border-2 border-zinc-800 rounded-lg outline-none focus:border-blue-400"
+          placeholder="Username"
+          name="username"
+          value="<%= username %>"
+        />
+        <input
+          type="text"
+          class="px-3 py-2 bg-transparent border-2 border-zinc-800 rounded-lg outline-none focus:border-blue-400"
+          placeholder="Email"
+          name="email"
+          value="<%= email %>"
+        />
+        <input
+          type="text"
+          class="px-3 py-2 bg-transparent border-2 border-zinc-800 rounded-lg outline-none focus:border-blue-400"
+          placeholder="Image URL"
+          name="image"
+          value="<%= image %>"
+        />
+        <button type="Update" class="px-5 py-2 bg-yellow-500 text-black rounded-lg">
+          Submit
+        </button>
+      </form>
+    </div>
+  </body>
+</html>
