@@ -1,33 +1,21 @@
 const express = require("express");
-const bcrypt = require("bcrypt");
 const app = express();
+const jwt = require("jsonwebtoken");
 const port = 3000;
 
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash("Vedant@04082005", salt, (err, hash) => {
-      console.log(hash);
-    });
-  });
-  bcrypt.compare(
-    "Vedant@04082005",
-    "$2b$10$A5if8P8mCEdhi.GxIDI0U.mEjXz9fUfdKn189jccWL88KqcxfvbCq",
-    function (err, result) {
-      console.log(result);
-    }
-  );  
-
+  const token = jwt.sign({ email: "iemvedant@gmail.com" }, "shhhhh");
+  res.cookie("token", token);
   res.send("Hello World!");
 });
 
-app.get("/read", (req, res) => {
-  console.log(req.cookies);
-  res.send("Reading");
+app.get("/dashboard", (req, res) => {
+  const data = jwt.verify(req.cookies.token, "shhhhh");
+  console.log(data);
 });
-
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+  console.log(`Example app listening on port ${port}`);
 });
